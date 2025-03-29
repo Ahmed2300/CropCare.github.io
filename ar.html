@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"> <!-- Set Language and Direction -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض تطبيق CropCare</title> <!-- Arabic Title -->
+    <!-- Google Fonts - Consider specific Arabic fonts like Cairo, Tajawal, Noto Sans Arabic for better rendering -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Filled Icons -->
+
+    <style>
+        /* --- START CSS --- */
+
+        :root {
+           --cropcare-green: #4CAF50;
+           --cropcare-dark-green: #388E3C;
+           --text-dark: #212121;
+           --text-medium: #5f5f5f;
+           --text-light: #9e9e9e;
+           --bg-light-gray: #f5f7fa;
+           --border-color: #e8edf1;
+           --white: #ffffff;
+           --black: #000000;
+           /* Consider adding primary Arabic font */
+           --font-arabic: 'Cairo', 'Poppins', sans-serif;
+        }
+
+        /* Basic Reset & Font */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { width: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-arabic); /* Apply Arabic font */
+            background-color: var(--white); color: var(--text-medium);
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh; padding: 0;
+        }
+
+        /* Main container */
+        .page-container {
+            width: 100%; max-width: 1300px; padding: 40px 20px; margin: 0 auto;
+        }
+
+        /* Page Title */
+        h1.page-title {
+            color: var(--text-dark); margin-bottom: 50px; font-weight: 600;
+            font-size: 2.8em; text-align: center;
+        }
+        h1.page-title span { color: var(--cropcare-green); }
+
+        /* Section Styling */
+        .content-section {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 40px 10px; gap: 30px;
+            margin-bottom: 60px; border-bottom: 1px solid var(--border-color);
+        }
+        .content-section:last-child { margin-bottom: 0; border-bottom: none; }
+
+        /* Layout Containers within Section */
+        .section-visual { flex-basis: 45%; display: flex; justify-content: center; align-items: center; max-width: 400px; width: 100%; }
+        .section-content { flex-basis: 50%; text-align: right; display: flex; flex-direction: column; justify-content: center; max-width: 600px; width: 100%; } /* Default to right align for RTL */
+
+        /* Intro Image Styling */
+        .intro-image { display: block; width: 100%; max-width: 700px; height: auto; object-fit: contain; border-radius: 10px; margin-bottom: 20px; }
+
+        /* Modern Phone Frame */
+        .phone-frame { background: var(--black); padding: 5px; border-radius: 36px; box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.1); width: 100%; max-width: 270px; position: relative; flex-shrink: 0; margin: 0 auto; }
+        .phone-frame::before { display: none; }
+        .phone-screen { background: var(--black); border-radius: 31px; overflow: hidden; aspect-ratio: 9 / 19.5; width: 100%; height: auto; position: relative; z-index: 1; }
+        .phone-screen img, .phone-screen video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; border: none; }
+
+        /* Section Content Styling */
+        .section-content h2 { font-size: 2.2em; color: var(--text-dark); margin-bottom: 15px; font-weight: 600; line-height: 1.4; } /* Adjusted line-height */
+        .section-content h2 .highlight { color: var(--cropcare-green); font-weight: 700; }
+        .section-content p, .section-content li { font-size: 1.05em; color: var(--text-medium); line-height: 1.8; font-weight: 400; margin-bottom: 12px; } /* Increased line-height */
+        .section-content p:last-child, .section-content li:last-child { margin-bottom: 0; }
+        .section-content ul { list-style: none; padding-right: 0; /* Adjust padding for RTL */ margin-top: 15px; }
+        .section-content li { display: flex; align-items: flex-start; margin-bottom: 10px; }
+        .section-content li .material-icons-outlined {
+            margin-left: 12px; /* Swapped margin */
+            margin-right: 0;
+            color: var(--cropcare-green); font-size: 1.3em; margin-top: 6px; /* Adjusted alignment */ flex-shrink: 0;
+         }
+
+        /* APK Install Steps Styling */
+         .install-steps-container { width: 100%; max-width: 1000px; text-align: center; }
+         .install-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; width: 100%; margin-top: 30px; }
+         .step-card { background-color: var(--white); border: 1px solid var(--border-color); padding: 30px 20px; border-radius: 16px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; position: relative; overflow: hidden; }
+         .step-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 10px 20px rgba(76, 175, 80, 0.15); }
+         .step-card::before {
+             content: counter(step-counter); position: absolute; top: -15px;
+             left: -10px; /* Adjust for RTL */
+             right: auto;
+             font-size: 4em; font-weight: 700; color: rgba(76, 175, 80, 0.1); z-index: 1; line-height: 1;
+         }
+         body { counter-reset: step-counter; }
+         .step-card { counter-increment: step-counter; }
+         .step-card .icon-wrapper { background-color: var(--cropcare-green); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); position: relative; z-index: 2; }
+         .step-card .icon-wrapper .material-icons, .step-card .icon-wrapper .material-icons-outlined { font-size: 2em; }
+         .step-card h3 { font-size: 1.15em; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; position: relative; z-index: 2; }
+         .step-card p { font-size: 0.95em; color: var(--text-medium); line-height: 1.7; margin-bottom: 0; position: relative; z-index: 2; } /* Slightly larger text */
+         .download-button { display: inline-flex; align-items: center; background-color: var(--cropcare-green); color: var(--white); text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; font-size: 1em; margin-top: 40px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4); transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+         .download-button .material-icons-outlined { margin-left: 8px; margin-right: 0; } /* Swap icon margin */
+         .download-button:hover { background-color: var(--cropcare-dark-green); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5); }
+
+        /* Developer Info Styling */
+        .dev-info-container { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; max-width: 900px; text-align: center; background-color: var(--bg-light-gray); padding: 40px 30px; border-radius: 20px; border: 1px solid var(--border-color); margin: 0 auto; }
+        .dev-photo { width: 160px; height: 160px; border-radius: 50%; background-color: #e0e0e0; border: 5px solid var(--white); display: flex; justify-content: center; align-items: center; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .dev-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .dev-details { text-align: center; }
+        .dev-details h3 { font-size: 1.8em; color: var(--text-dark); font-weight: 600; margin-bottom: 10px; }
+        .dev-details .role { font-size: 1em; color: var(--cropcare-green); font-weight: 500; margin-bottom: 20px; display: block; }
+        .dev-details .bio { font-size: 1em; color: var(--text-medium); margin-bottom: 30px; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .contact-info { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 30px; }
+        .contact-info a { display: inline-flex; align-items: center; text-decoration: none; color: var(--text-medium); font-size: 1em; transition: color 0.2s ease; }
+        .contact-info a:hover { color: var(--cropcare-green); }
+        .contact-info .material-icons-outlined {
+            margin-left: 8px; /* Swap margin */
+            margin-right: 0;
+            font-size: 1.5em; color: var(--cropcare-dark-green);
+         }
+
+        /* --- Responsive Adjustments --- */
+         @media (min-width: 768px) {
+              .content-section {
+                  flex-direction: row-reverse; /* Reverse for RTL side-by-side */
+                  justify-content: space-evenly; gap: 40px;
+               }
+              .section-content { text-align: right; } /* Ensure right align */
+              .content-section:first-of-type .section-visual { max-width: 500px; }
+              .dev-info-container {
+                  flex-direction: row-reverse; /* Reverse for RTL */
+                   text-align: right; gap: 50px; padding: 50px;
+               }
+              .dev-details { text-align: right; }
+              .dev-details .bio { margin-left: 0; margin-right: 0; }
+              .contact-info { justify-content: flex-start; }
+         }
+         @media (max-width: 767px) {
+            .page-container { padding: 20px 10px; }
+            h1.page-title { font-size: 1.8em; margin-bottom: 30px; }
+            .content-section { flex-direction: column; gap: 30px; padding: 20px 5px; margin-bottom: 40px; }
+            .section-visual, .section-content { flex-basis: auto; max-width: 95%; }
+            .section-content { text-align: center; } /* Center on mobile */
+            .section-content h2 { font-size: 1.6em; }
+            .section-content p, .section-content li { font-size: 0.95em; }
+            .section-content ul { padding-right: 0; } /* Adjust padding */
+            .section-content li { justify-content: center; text-align: right;} /* Center list items, text right */
+            .section-content li .material-icons-outlined { margin-top: 2px; font-size: 1.2em; margin-left: 8px; margin-right: 0;}
+            .phone-frame { max-width: 240px; border-radius: 28px; padding: 4px;}
+            .phone-screen { border-radius: 24px; }
+            .intro-image { max-height: 40vh; max-width: 90%;}
+            .install-steps { grid-template-columns: 1fr; gap: 20px; }
+            .dev-info-container { padding: 30px 15px; gap: 20px;}
+            .dev-photo { width: 120px; height: 120px; }
+            .dev-details h3 { font-size: 1.5em; }
+            .dev-details .bio { font-size: 0.95em; }
+            .contact-info { gap: 15px 20px; }
+            .contact-info a { font-size: 0.9em; }
+        }
+
+        /* --- END CSS --- */
+    </style>
+
+</head>
+<body>
+
+    <div class="page-container">
+        <h1 class="page-title">عرض تطبيق <span>CropCare</span></h1>
+
+        <!-- Section 1: Branding -->
+        <section class="content-section">
+            <div class="section-visual">
+                 <img src="https://iili.io/3ubr9hG.png" alt="CropCare Branding" class="intro-image">
+            </div>
+            <div class="section-content">
+                <h2><span class="highlight">CropCare:</span> المراقبة الذكية لصحة النبات</h2>
+                <p> نقدم لكم CropCare، مساعدك المدعوم بالذكاء الاصطناعي لنباتات أكثر صحة. نحن نستخدم أحدث تقنيات التعرف على الصور لتقديم تشخيصات متقدمة في متناول يدك.</p>
+                <p>افهم نباتاتك بشكل لم يسبق له مثيل!</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Splash Screen -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubr8G4.jpg" alt="CropCare Splash Screen"> </div>
+                </div>
+            </div>
+             <div class="section-content">
+                <h2>بداية <span class="highlight">بسيطة</span> ونظيفة</h2>
+                <p>نقطة دخول نظيفة ومركزة ومرحبة. يتم تحميل شاشة البداية بسرعة، مما يضفي طابعًا احترافيًا وحديثًا لتجربة المستخدم.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Welcome / Features -->
+        <section class="content-section">
+            <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ub69f4.jpg" alt="CropCare Welcome Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                 <h2>مرحبًا بك في <span class="highlight">CropCare</span></h2>
+                 <p>ابدأ بسهولة! سجّل الدخول باستخدام Google لتجربة مخصصة أو استمر كضيف. اكتشف الميزات الأساسية:</p>
+                 <ul>
+                     <li><span class="material-icons-outlined">spa</span> فحوصات صحة النبات مدعومة بالذكاء الاصطناعي</li>
+                     <li><span class="material-icons-outlined">search</span> كشف دقيق للأمراض</li>
+                     <li><span class="material-icons-outlined">lightbulb</span> نصائح وإرشادات رعاية متخصصة</li>
+                     <li><span class="material-icons-outlined">shopping_cart</span> توصيات للمنتجات ذات الصلة</li>
+                 </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: Scan / Upload -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubP34R.jpg" alt="CropCare Scan/Upload Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                 <h2>إدخال تشخيص <span class="highlight">سهل</span></h2>
+                 <p>الحصول على تشخيص أمر سهل. استخدم كاميرا هاتفك لالتقاط صورة واضحة أو قم ببساطة بتحميل صورة موجودة من معرض الصور الخاص بك.</p>
+                 <p>الذكاء الاصطناعي لدينا جاهز لتحليل البيانات المرئية بحثًا عن علامات الأمراض أو النقص.</p>
+            </div>
+        </section>
+
+         <!-- Section 5: History -->
+         <section class="content-section">
+              <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ub6Kbe.md.jpg" alt="CropCare History Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2><span class="highlight">سجل</span> الفحص والتتبع</h2>
+                <p>احتفظ بسجل مفصل لجميع فحوصات نباتاتك. تتبع بسهولة التقدم الصحي للنباتات أو المحاصيل الفردية بمرور الوقت.</p>
+                <p>شاهد بسرعة التشخيصات السابقة أو تأكيدات الصحة. يتضمن الطوابع الزمنية والمشاكل المكتشفة.</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Scanning -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3um9Enp.png" alt="CropCare Scanning Screen"> </div>
+                </div>
+            </div>
+             <div class="section-content">
+                 <h2>تحليل الذكاء الاصطناعي <span class="highlight">قيد التقدم</span></h2>
+                 <p>استرخ بينما يقوم نموذج الذكاء الاصطناعي القوي والمدرب لدينا بتحليل الصورة التي قدمتها. تحدد عملية المسح المرئي الأنماط وتغير اللون والقوام الذي يشير إلى حالات مختلفة.</p>
+                 <p>تستغرق المعالجة عادة بضع لحظات فقط.</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Disease Detected Result -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubPmF4.png" alt="CropCare Disease Detected Result"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>تشخيص مفصل <span class="highlight">بالذكاء الاصطناعي</span></h2>
+                <p>احصل على نتائج واضحة وقابلة للتنفيذ. عند اكتشاف مرض أو مشكلة، يوفر CropCare:</p>
+                <ul>
+                    <li><span class="material-icons-outlined">coronavirus</span>التحديد المحتمل (مثل BCMV، نقص المغذيات).</li>
+                    <li><span class="material-icons-outlined">biotech</span>وصف الأعراض والتأثير.</li>
+                    <li><span class="material-icons-outlined">healing</span>خطوات العلاج الموصى بها أو الإجراءات الإضافية.</li>
+                 </ul>
+                 <p>(ملاحظة: قد تكون هناك حاجة للاختبار المعملي للتأكيد الفيروسي النهائي).</p>
+            </div>
+        </section>
+
+        <!-- Section 8: Healthy Result -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubinSV.png" alt="CropCare Healthy Result"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2><span class="highlight">تأكيد</span> الصحة</h2>
+                <p>أخبار جيدة! عند عدم اكتشاف أي مشاكل، يؤكد CropCare أن النبات يبدو بصحة جيدة بناءً على التحليل المرئي.</p>
+                <p>نحن نقدم درجة ثقة تعكس يقين الذكاء الاصطناعي ومؤشر مستوى خطر منخفض.</p>
+            </div>
+        </section>
+
+         <!-- Section 9: Settings -->
+         <section class="content-section">
+             <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubialR.png" alt="CropCare Settings Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2><span class="highlight">إعدادات</span> قابلة للتخصيص</h2>
+                <p>خصص CropCare ليناسب احتياجاتك. اضبط التفضيلات مثل:</p>
+                 <ul>
+                    <li><span class="material-icons-outlined">location_on</span> تمكين خدمات الموقع للحصول على نصائح خاصة بالمنطقة.</li>
+                    <li><span class="material-icons-outlined">translate</span> اختيار لغتك المفضلة للواجهة.</li>
+                    <li><span class="material-icons-outlined">info</span> الوصول إلى معلومات التطبيق وتفاصيل الإصدار.</li>
+                 </ul>
+            </div>
+        </section>
+
+        <!-- Section 10: App Demo Video (Inside Frame) -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen">
+                       <video id="appDemoVideo" controls width="100%" height="100%" preload="metadata" poster="OPTIONAL_POSTER_IMAGE_URL">
+                           <source src="https://www.dropbox.com/scl/fi/1klxb7gar04n5tgaclttm/cropcare_vid.mp4?rlkey=6x2ok211923n9fu15n5k0awc8&st=qw2kfam3&raw=1" type="video/mp4">
+                           متصفحك لا يدعم عرض الفيديو.
+                       </video>
+                   </div>
+                </div>
+            </div>
+             <div class="section-content">
+                 <h2>شاهد <span class="highlight">CropCare</span> أثناء العمل!</h2>
+                 <p>شاهد هذا العرض التوضيحي القصير لترى مدى سهولة فحص نباتاتك والحصول على رؤى صحية فورية مدعومة بالذكاء الاصطناعي مباشرة على هاتفك.</p>
+                 <p>من تحديد الأمراض المحتملة إلى تأكيد النمو الصحي، يضع CropCare المعرفة المتخصصة في جيبك.</p>
+            </div>
+        </section>
+
+        <!-- Section 11: APK Installation Guide -->
+        <section class="content-section" style="flex-direction: column;">
+             <div class="install-steps-container">
+                 <h2>تثبيت <span class="highlight">CropCare</span> على أندرويد</h2>
+                 <p>اتبع هذه الخطوات البسيطة لتثبيت تطبيق CropCare باستخدام ملف APK.</p>
+                 <div class="install-steps">
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons">download</span></div> <h3>1. تحميل APK</h3> <p>اضغط على زر التحميل أدناه للحصول على ملف `CropCare.apk`.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">security</span></div> <h3>2. السماح بالمصادر</h3> <p>اذهب إلى الإعدادات > الأمان، وقم بتمكين "تثبيت التطبيقات غير المعروفة" للمتصفح/مدير الملفات.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">folder_open</span></div> <h3>3. البحث والتثبيت</h3> <p>افتح مدير الملفات، وابحث عن ملف APK الذي تم تنزيله، واضغط عليه للتثبيت.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">launch</span></div> <h3>4. تشغيل التطبيق</h3> <p>ابحث عن أيقونة CropCare على هاتفك واضغط لبدء التشخيص!</p> </div>
+                 </div>
+                  <a href="https://www.dropbox.com/scl/fi/jlmnsyal4okvoj4j4n500/CropCare.apk?rlkey=qsqsji66x9w1t1kdcd2e7dqkl&st=rjldxqhp&dl=1" class="download-button" download>
+                    <span class="material-icons-outlined">file_download</span> تحميل CropCare APK
+                 </a>
+            </div>
+        </section>
+
+        <!-- Section 12: Developer Info -->
+         <section class="content-section" style="flex-direction: column; border-bottom: none;">
+             <div class="dev-info-container">
+                <div class="dev-photo">
+                     <img src="https://www.dropbox.com/scl/fi/1t2nmze4hzi5bchak36ft/FB_IMG_1743224652660.jpg?rlkey=to88ennpo14fn1171y9n1d7ak&st=nyidi6ow&raw=1" alt="صورة أحمد عمرو عزام">
+                </div>
+                <div class="dev-details">
+                     <h2>تعرف على <span class="highlight">المطور</span></h2>
+                     <h3>أحمد عمرو عزام</h3>
+                     <span class="role">مطور Flutter وأندرويد وويب | مدرس فيزياء</span>
+                     <p class="bio">
+                        مطور متخصص في Flutter و Dart و Android Studio وتطبيقات الويب، يجلب أحمد منظورًا فريدًا يجمع بين الخبرة التقنية وخلفيته كمدرس فيزياء. يمتد شغفه إلى ما هو أبعد من البرمجة، حيث يجد سحرًا في أناقة المعادلات الرياضية وتعقيدات الظواهر الفيزيائية. هذا المزيج من التفكير التحليلي وحل المشكلات الإبداعي يقود نهجه في بناء تطبيقات بديهية وفعالة مثل CropCare.
+                     </p>
+                     <div class="contact-info">
+                         <a href="mailto:ahmedazaki0125@gmail.com" title="البريد الإلكتروني"><span class="material-icons-outlined">email</span> ahmedazaki0125@gmail.com</a>
+                         <a href="https://www.linkedin.com/in/ahmed-azam-320a98200" target="_blank" rel="noopener noreferrer" title="LinkedIn"><span class="material-icons-outlined">link</span> الملف الشخصي على LinkedIn</a>
+                     </div>
+                </div>
+             </div>
+        </section>
+
+    </div> <!-- /page-container -->
+
+    <!-- No JS needed -->
+
+</body>
+</html>
