@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CropCare App Presentation</title>
+    <title>CropCare App Showcase</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Material Icons -->
@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> <!-- Filled Icons -->
 
     <style>
-        /* --- CSS (No changes from previous version needed here) --- */
+        /* --- START CSS --- */
+
         :root {
            --cropcare-green: #4CAF50;
            --cropcare-dark-green: #388E3C;
@@ -23,46 +24,110 @@
            --white: #ffffff;
            --black: #000000;
         }
+
+        /* Basic Reset & Font */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html, body { width: 100%; overflow-x: hidden; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--white); color: var(--text-medium); display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 20px 15px; }
-        .presentation-container { padding: 20px 0; text-align: center; width: 100%; max-width: 1300px; margin: 20px auto; }
-        h1.presentation-title { color: var(--text-dark); margin-bottom: 40px; font-weight: 600; font-size: 2.5em; }
-        h1.presentation-title span { color: var(--cropcare-green); }
-        .slider-wrapper { position: relative; width: 100%; margin: 0 auto; overflow: hidden; padding: 30px 0; }
-        .slider-wrapper::before, .slider-wrapper::after { content: ''; position: absolute; width: 80px; height: 80px; background-image: radial-gradient(var(--border-color) 1px, transparent 1px); background-size: 8px 8px; opacity: 0.5; z-index: -1; }
-        .slider-wrapper::before { top: 10px; left: 10px; } .slider-wrapper::after { bottom: 10px; right: 10px; }
-        .slider { display: flex; width: 100%; transition: transform 0.6s ease-in-out; }
-        .slide { min-width: 100%; flex-shrink: 0; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 10px; gap: 30px; min-height: 70vh; }
-        .slide-visual { flex-basis: 45%; display: flex; justify-content: center; align-items: center; max-width: 400px; width: 100%; }
-        .slide-content { flex-basis: 50%; text-align: left; display: flex; flex-direction: column; justify-content: center; max-width: 600px; width: 100%; }
-        .intro-image { display: block; width: 100%; max-width: 100%; max-height: 60vh; height: auto; object-fit: contain; border-radius: 10px; }
-        .phone-frame { background: var(--black); padding: 5px; border-radius: 36px; box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.1); width: 100%; max-width: 270px; position: relative; flex-shrink: 0; }
+        html, body { width: 100%; overflow-x: hidden; scroll-behavior: smooth; } /* Added smooth scroll */
+        body {
+            font-family: 'Poppins', sans-serif; background-color: var(--white); color: var(--text-medium);
+            display: flex; justify-content: center; align-items: flex-start;
+            min-height: 100vh; padding: 0; /* Removed body padding */
+        }
+
+        /* Main container for the entire page content */
+        .page-container {
+            width: 100%;
+            max-width: 1300px; /* Max width for content */
+            padding: 40px 20px; /* Padding top/bottom and sides */
+            margin: 0 auto;
+        }
+
+        /* Page Title */
+        h1.page-title {
+            color: var(--text-dark); margin-bottom: 50px; font-weight: 600;
+            font-size: 2.8em; text-align: center;
+        }
+        h1.page-title span { color: var(--cropcare-green); }
+
+        /* --- Section Styling (Replaces .slide) --- */
+        .content-section {
+            display: flex;
+            flex-direction: column; /* Default: Stack visual and content */
+            align-items: center;
+            justify-content: center;
+            padding: 40px 10px; /* Vertical padding within section */
+            gap: 30px;
+            margin-bottom: 60px; /* Space between sections */
+            border-bottom: 1px solid var(--border-color); /* Optional separator */
+        }
+        .content-section:last-child {
+             margin-bottom: 0; /* No margin after last section */
+             border-bottom: none; /* No border after last */
+        }
+
+        /* Layout Containers within Section */
+        .section-visual { /* Replaces .slide-visual */
+            flex-basis: 45%; display: flex; justify-content: center;
+            align-items: center; max-width: 400px; width: 100%;
+        }
+        .section-content { /* Replaces .slide-content */
+            flex-basis: 50%; text-align: left; display: flex;
+            flex-direction: column; justify-content: center;
+            max-width: 600px; width: 100%;
+        }
+
+        /* Intro Image Styling */
+        .intro-image {
+             display: block; width: 100%; max-width: 700px; /* Allow larger intro */
+             max-height: none; /* Remove height limit */
+             height: auto; object-fit: contain; border-radius: 10px;
+             margin-bottom: 20px; /* Space below intro image */
+        }
+
+        /* Modern Phone Frame */
+        .phone-frame {
+            background: var(--black); padding: 5px; border-radius: 36px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.1);
+            width: 100%; max-width: 270px; position: relative; flex-shrink: 0;
+            margin: 0 auto; /* Center frame if needed */
+        }
         .phone-frame::before { display: none; }
-        .phone-screen { background: var(--black); border-radius: 31px; overflow: hidden; aspect-ratio: 9 / 19.5; width: 100%; height: auto; position: relative; z-index: 1; }
-        .phone-screen img, .phone-screen video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center center; border: none; }
-        .slide-content h2 { font-size: 2.2em; color: var(--text-dark); margin-bottom: 15px; font-weight: 600; line-height: 1.3; }
-        .slide-content h2 .highlight { color: var(--cropcare-green); font-weight: 700; }
-        .slide-content p, .slide-content li { font-size: 1.05em; color: var(--text-medium); line-height: 1.7; font-weight: 400; margin-bottom: 12px; }
-        .slide-content p:last-child, .slide-content li:last-child { margin-bottom: 0; }
-        .slide-content ul { list-style: none; padding-left: 0; margin-top: 15px; }
-        .slide-content li { display: flex; align-items: flex-start; margin-bottom: 10px; }
-        .slide-content li .material-icons-outlined { margin-right: 12px; color: var(--cropcare-green); font-size: 1.3em; margin-top: 4px; flex-shrink: 0; }
-        .install-steps-container { width: 100%; max-width: 1000px; text-align: center; }
-        .install-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; width: 100%; margin-top: 30px; }
-        .step-card { background-color: var(--white); border: 1px solid var(--border-color); padding: 30px 20px; border-radius: 16px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; position: relative; overflow: hidden; }
-        .step-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 10px 20px rgba(76, 175, 80, 0.15); }
-        .step-card::before { content: counter(step-counter); position: absolute; top: -15px; right: -10px; font-size: 4em; font-weight: 700; color: rgba(76, 175, 80, 0.1); z-index: 1; line-height: 1; }
-        body { counter-reset: step-counter; }
-        .step-card { counter-increment: step-counter; }
-        .step-card .icon-wrapper { background-color: var(--cropcare-green); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); position: relative; z-index: 2; }
-        .step-card .icon-wrapper .material-icons, .step-card .icon-wrapper .material-icons-outlined { font-size: 2em; }
-        .step-card h3 { font-size: 1.15em; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; position: relative; z-index: 2; }
-        .step-card p { font-size: 0.9em; color: var(--text-medium); line-height: 1.6; margin-bottom: 0; position: relative; z-index: 2; }
-        .download-button { display: inline-flex; align-items: center; background-color: var(--cropcare-green); color: var(--white); text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; font-size: 1em; margin-top: 40px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4); transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
-        .download-button .material-icons-outlined { margin-right: 8px; }
-        .download-button:hover { background-color: var(--cropcare-dark-green); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5); }
-        .dev-info-container { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; max-width: 900px; text-align: center; background-color: var(--bg-light-gray); padding: 40px 30px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .phone-screen {
+            background: var(--black); border-radius: 31px; overflow: hidden;
+            aspect-ratio: 9 / 19.5; width: 100%; height: auto; position: relative; z-index: 1;
+        }
+        .phone-screen img, .phone-screen video {
+            display: block; width: 100%; height: 100%;
+            object-fit: cover; object-position: center center; border: none;
+        }
+
+        /* Section Content Styling */
+        .section-content h2 { font-size: 2.2em; color: var(--text-dark); margin-bottom: 15px; font-weight: 600; line-height: 1.3; }
+        .section-content h2 .highlight { color: var(--cropcare-green); font-weight: 700; }
+        .section-content p, .section-content li { font-size: 1.05em; color: var(--text-medium); line-height: 1.7; font-weight: 400; margin-bottom: 12px; }
+        .section-content p:last-child, .section-content li:last-child { margin-bottom: 0; }
+        .section-content ul { list-style: none; padding-left: 0; margin-top: 15px; }
+        .section-content li { display: flex; align-items: flex-start; margin-bottom: 10px; }
+        .section-content li .material-icons-outlined { margin-right: 12px; color: var(--cropcare-green); font-size: 1.3em; margin-top: 4px; flex-shrink: 0; }
+
+        /* APK Install Steps Styling */
+         .install-steps-container { width: 100%; max-width: 1000px; text-align: center; }
+         .install-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; width: 100%; margin-top: 30px; }
+         .step-card { background-color: var(--white); border: 1px solid var(--border-color); padding: 30px 20px; border-radius: 16px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; position: relative; overflow: hidden; }
+         .step-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 10px 20px rgba(76, 175, 80, 0.15); }
+         .step-card::before { content: counter(step-counter); position: absolute; top: -15px; right: -10px; font-size: 4em; font-weight: 700; color: rgba(76, 175, 80, 0.1); z-index: 1; line-height: 1; }
+         body { counter-reset: step-counter; }
+         .step-card { counter-increment: step-counter; }
+         .step-card .icon-wrapper { background-color: var(--cropcare-green); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3); position: relative; z-index: 2; }
+         .step-card .icon-wrapper .material-icons, .step-card .icon-wrapper .material-icons-outlined { font-size: 2em; }
+         .step-card h3 { font-size: 1.15em; font-weight: 600; color: var(--text-dark); margin-bottom: 10px; position: relative; z-index: 2; }
+         .step-card p { font-size: 0.9em; color: var(--text-medium); line-height: 1.6; margin-bottom: 0; position: relative; z-index: 2; }
+         .download-button { display: inline-flex; align-items: center; background-color: var(--cropcare-green); color: var(--white); text-decoration: none; padding: 12px 30px; border-radius: 50px; font-weight: 500; font-size: 1em; margin-top: 40px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4); transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease; }
+         .download-button .material-icons-outlined { margin-right: 8px; }
+         .download-button:hover { background-color: var(--cropcare-dark-green); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5); }
+
+        /* Developer Info Styling */
+        .dev-info-container { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 100%; max-width: 900px; text-align: center; background-color: var(--bg-light-gray); padding: 40px 30px; border-radius: 20px; border: 1px solid var(--border-color); margin: 0 auto; /* Center the dev container */ }
         .dev-photo { width: 160px; height: 160px; border-radius: 50%; background-color: #e0e0e0; border: 5px solid var(--white); display: flex; justify-content: center; align-items: center; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.1); flex-shrink: 0; }
         .dev-photo img { width: 100%; height: 100%; object-fit: cover; }
         .dev-details { text-align: center; }
@@ -73,15 +138,47 @@
         .contact-info a { display: inline-flex; align-items: center; text-decoration: none; color: var(--text-medium); font-size: 1em; transition: color 0.2s ease; }
         .contact-info a:hover { color: var(--cropcare-green); }
         .contact-info .material-icons-outlined { margin-right: 8px; font-size: 1.5em; color: var(--cropcare-dark-green); }
-        .slider-dots { text-align: center; margin-top: 30px; }
-        .dot { display: inline-block; width: 10px; height: 10px; background-color: #d0d0d0; border-radius: 50%; margin: 0 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; }
-        .dot.active { background-color: var(--cropcare-green); transform: scale(1.1); }
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background-color: transparent; color: var(--cropcare-green); border: none; padding: 10px; font-size: 2.8em; font-weight: 300; cursor: pointer; border-radius: 0; transition: color 0.3s ease, transform 0.2s ease; z-index: 10; line-height: 1; height: auto; width: auto; display: flex; align-items: center; justify-content: center; }
-        .slider-arrow:hover { color: var(--cropcare-dark-green); transform: translateY(-50%) scale(1.1); }
-        .slider-arrow.prev { left: 20px; }
-        .slider-arrow.next { right: 20px; }
-         @media (min-width: 768px) { .slide { flex-direction: row; justify-content: space-evenly; gap: 40px;} .slide-content { text-align: left; } .slide:first-child .slide-visual { max-width: 500px; } .dev-info-container { flex-direction: row; text-align: left; gap: 50px; padding: 50px;} .dev-details { text-align: left; } .dev-details .bio { margin-left: 0; margin-right: 0; } .contact-info { justify-content: flex-start; } }
-         @media (max-width: 767px) { body { padding: 10px 5px; } .presentation-container { margin: 10px 0; padding: 10px 0; } h1.presentation-title { font-size: 1.8em; margin-bottom: 25px; } .slide { flex-direction: column; gap: 30px; padding: 15px 5px; min-height: 60vh;} .slide-visual, .slide-content { flex-basis: auto; max-width: 95%; } .slide-content { text-align: center; } .slide-content h2 { font-size: 1.6em; } .slide-content p, .slide-content li { font-size: 0.95em; } .slide-content ul { padding-left: 0; } .slide-content li { justify-content: center; text-align: left;} .slide-content li .material-icons-outlined { margin-top: 2px; font-size: 1.2em;} .phone-frame { max-width: 240px; border-radius: 28px; padding: 4px;} .phone-screen { border-radius: 24px; } .intro-image { max-height: 40vh; max-width: 90%;} .slider-arrow { font-size: 2.2em; padding: 5px; } .slider-arrow.prev { left: 5px; } .slider-arrow.next { right: 5px; } .dot { width: 9px; height: 9px; margin: 0 4px; } .slider-dots { margin-top: 20px; } .slider-wrapper::before, .slider-wrapper::after { width: 50px; height: 50px; background-size: 6px 6px;} .install-steps { grid-template-columns: 1fr; gap: 20px; } .dev-info-container { padding: 30px 15px; gap: 20px;} .dev-photo { width: 120px; height: 120px; } .dev-details h3 { font-size: 1.5em; } .dev-details .bio { font-size: 0.95em; } .contact-info { gap: 15px 20px; } .contact-info a { font-size: 0.9em; } }
+
+        /* --- Responsive Adjustments --- */
+         @media (min-width: 768px) {
+              .content-section { /* Apply side-by-side layout within sections */
+                  flex-direction: row;
+                  justify-content: space-evenly;
+                  gap: 40px;
+              }
+              /* Target first section specially if needed */
+              .content-section:first-of-type {
+                  /* Special styles for first section if needed */
+              }
+              .section-content { text-align: left; }
+              .content-section:first-of-type .section-visual { max-width: 500px; }
+              .dev-info-container { flex-direction: row; text-align: left; gap: 50px; padding: 50px;}
+              .dev-details { text-align: left; }
+              .dev-details .bio { margin-left: 0; margin-right: 0; }
+              .contact-info { justify-content: flex-start; }
+         }
+         @media (max-width: 767px) {
+            .page-container { padding: 20px 10px; }
+            h1.page-title { font-size: 1.8em; margin-bottom: 30px; }
+            .content-section { flex-direction: column; gap: 30px; padding: 20px 5px; margin-bottom: 40px; }
+            .section-visual, .section-content { flex-basis: auto; max-width: 95%; }
+            .section-content { text-align: center; }
+            .section-content h2 { font-size: 1.6em; }
+            .section-content p, .section-content li { font-size: 0.95em; }
+            .section-content ul { padding-left: 0; }
+            .section-content li { justify-content: center; text-align: left;}
+            .section-content li .material-icons-outlined { margin-top: 2px; font-size: 1.2em;}
+            .phone-frame { max-width: 240px; border-radius: 28px; padding: 4px;}
+            .phone-screen { border-radius: 24px; }
+            .intro-image { max-height: 40vh; max-width: 90%;}
+            .install-steps { grid-template-columns: 1fr; gap: 20px; }
+            .dev-info-container { padding: 30px 15px; gap: 20px;}
+            .dev-photo { width: 120px; height: 120px; }
+            .dev-details h3 { font-size: 1.5em; }
+            .dev-details .bio { font-size: 0.95em; }
+            .contact-info { gap: 15px 20px; }
+            .contact-info a { font-size: 0.9em; }
+        }
 
         /* --- END CSS --- */
     </style>
@@ -89,226 +186,208 @@
 </head>
 <body>
 
-    <div class="presentation-container">
-        <h1 class="presentation-title">CropCare App <span>Showcase</span></h1>
+    <div class="page-container"> <!-- Changed main container class -->
+        <h1 class="page-title">CropCare App <span>Showcase</span></h1> <!-- Changed title class -->
 
-        <div class="slider-wrapper">
-            <div class="slider">
+        <!-- Section 1: Branding -->
+        <section class="content-section">
+            <div class="section-visual">
+                 <img src="https://iili.io/3ubr9hG.png" alt="CropCare Branding" class="intro-image">
+            </div>
+            <div class="section-content">
+                <h2><span class="highlight">CropCare:</span> Smart Plant Health Monitoring</h2>
+                <p>Introducing CropCare, your AI-powered assistant for healthier plants. We leverage cutting-edge image recognition to bring advanced diagnostics right to your fingertips.</p>
+                <p>Understand your plants like never before!</p>
+            </div>
+        </section>
 
-                <!-- Slides 1-9 (Condensed) -->
-                <div class="slide"> <div class="slide-visual"><img src="https://iili.io/3ubr9hG.png" alt="Branding" class="intro-image"></div> <div class="slide-content"><h2><span class="highlight">CropCare:</span> Smart Plant Health Monitoring</h2><p>Introducing CropCare...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ubr8G4.jpg" alt="Splash"></div></div></div> <div class="slide-content"><h2>Clean & <span class="highlight">Simple</span> Start</h2><p>A clean, focused entry point...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ub69f4.jpg" alt="Welcome"></div></div></div> <div class="slide-content"><h2>Welcome to <span class="highlight">CropCare</span></h2><p>Get started easily...</p><ul><li>...</li></ul></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ubP34R.jpg" alt="Scan/Upload"></div></div></div> <div class="slide-content"><h2><span class="highlight">Easy</span> Diagnosis Input</h2><p>Getting a diagnosis is effortless...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ub6Kbe.md.jpg" alt="History"></div></div></div> <div class="slide-content"><h2>Scan <span class="highlight">History</span> & Tracking</h2><p>Keep a detailed record...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3um9Enp.png" alt="Scanning"></div></div></div> <div class="slide-content"><h2>AI Analysis <span class="highlight">In Progress</span></h2><p>Sit back while our AI analyzes...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ubPmF4.png" alt="Disease Result"></div></div></div> <div class="slide-content"><h2>Detailed <span class="highlight">AI Diagnosis</span></h2><p>Receive clear, actionable results...</p><ul><li>...</li></ul></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ubinSV.png" alt="Healthy Result"></div></div></div> <div class="slide-content"><h2>Health <span class="highlight">Confirmation</span></h2><p>Good news! Get confirmation...</p></div> </div>
-                <div class="slide"> <div class="slide-visual"><div class="phone-frame"><div class="phone-screen"><img src="https://iili.io/3ubialR.png" alt="Settings"></div></div></div> <div class="slide-content"><h2>Customizable <span class="highlight">Settings</span></h2><p>Tailor CropCare to your needs...</p><ul><li>...</li></ul></div> </div>
-
-
-                <!-- === Slide 10: App Demo Video (Inside Frame) === -->
-                <div class="slide">
-                     <div class="slide-visual">
-                        <div class="phone-frame">
-                           <div class="phone-screen">
-                               <!-- *** Add ID to video tag *** -->
-                               <video id="appDemoVideo" controls width="100%" height="100%" preload="metadata" poster="OPTIONAL_POSTER_IMAGE_URL">
-                                   <source src="https://www.dropbox.com/scl/fi/1klxb7gar04n5tgaclttm/cropcare_vid.mp4?rlkey=6x2ok211923n9fu15n5k0awc8&st=qw2kfam3&raw=1" type="video/mp4">
-                                   <!-- <source src="YOUR_VIDEO_FILE.webm?raw=1" type="video/webm"> -->
-                                   Your browser does not support the video tag.
-                               </video>
-                           </div>
-                        </div>
-                    </div>
-                     <div class="slide-content">
-                         <h2>See <span class="highlight">CropCare</span> in Action!</h2>
-                         <p>Watch this short demo to see how easy it is to scan your plants and get instant AI-powered health insights right on your phone.</p>
-                         <p>From identifying potential diseases to confirming healthy growth, CropCare puts expert knowledge in your pocket.</p>
-                    </div>
+        <!-- Section 2: Splash Screen -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubr8G4.jpg" alt="CropCare Splash Screen"> </div>
                 </div>
+            </div>
+             <div class="section-content">
+                <h2>Clean & <span class="highlight">Simple</span> Start</h2>
+                <p>A clean, focused, and welcoming entry point. The splash screen quickly loads the app, setting a professional and modern tone for the user experience.</p>
+            </div>
+        </section>
 
-                <!-- === Slide 11: APK Installation Guide === -->
-                <div class="slide">
-                     <div class="install-steps-container">
-                         <h2>Install <span class="highlight">CropCare</span> on Android</h2>
-                         <p>Follow these simple steps to install the CropCare app using the APK file.</p>
-                         <div class="install-steps">
-                            <div class="step-card"> <div class="icon-wrapper"><span class="material-icons">download</span></div> <h3>1. Download APK</h3> <p>Tap the download button below to get the `CropCare.apk` file.</p> </div>
-                             <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">security</span></div> <h3>2. Allow Sources</h3> <p>Go to Settings > Security, enable "Install unknown apps" for your browser/file manager.</p> </div>
-                             <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">folder_open</span></div> <h3>3. Locate & Install</h3> <p>Open your File Manager, find the downloaded APK, and tap it to install.</p> </div>
-                             <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">launch</span></div> <h3>4. Launch App</h3> <p>Find the CropCare icon on your phone and tap to start diagnosing!</p> </div>
-                         </div>
-                          <a href="https://www.dropbox.com/scl/fi/jlmnsyal4okvoj4j4n500/CropCare.apk?rlkey=qsqsji66x9w1t1kdcd2e7dqkl&st=rjldxqhp&dl=1" class="download-button" download>
-                            <span class="material-icons-outlined">file_download</span> Download CropCare APK
-                         </a>
-                    </div>
+        <!-- Section 3: Welcome / Features -->
+        <section class="content-section">
+            <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ub69f4.jpg" alt="CropCare Welcome Screen"> </div>
                 </div>
+            </div>
+            <div class="section-content">
+                 <h2>Welcome to <span class="highlight">CropCare</span></h2>
+                 <p>Get started easily! Discover the core features:</p>
+                 <ul>
+                     <li><span class="material-icons-outlined">spa</span> AI-Powered Plant Health Checks</li>
+                     <li><span class="material-icons-outlined">search</span> Accurate Disease Detection</li>
+                     <li><span class="material-icons-outlined">lightbulb</span> Expert Care Advice & Tips</li>
+                     <li><span class="material-icons-outlined">shopping_cart</span> Relevant Product Recommendations</li>
+                 </ul>
+            </div>
+        </section>
 
-                <!-- === Slide 12: Developer Info === -->
-                <div class="slide">
-                     <div class="dev-info-container">
-                        <div class="dev-photo">
-                             <img src="https://www.dropbox.com/scl/fi/1t2nmze4hzi5bchak36ft/FB_IMG_1743224652660.jpg?rlkey=to88ennpo14fn1171y9n1d7ak&st=nyidi6ow&raw=1" alt="Ahmed Amr Azam Photo">
-                        </div>
-                        <div class="dev-details">
-                             <h2>Meet the <span class="highlight">Developer</span></h2>
-                             <h3>Ahmed Amr Azam</h3>
-                             <span class="role">Flutter, Android & Web Developer | Physics Teacher</span>
-                             <p class="bio">
-                                A dedicated developer specializing in Flutter, Dart, Android Studio, and web applications, Ahmed brings a unique perspective, combining technical expertise with a background as a Physics teacher. His passion extends beyond code, finding fascination in the elegance of mathematical equations and the intricacies of physical phenomena. This blend of analytical thinking and creative problem-solving drives his approach to building intuitive and effective applications like CropCare.
-                             </p>
-                             <div class="contact-info">
-                                 <a href="mailto:ahmedazaki0125@gmail.com" title="Email"><span class="material-icons-outlined">email</span> ahmedazaki0125@gmail.com</a>
-                                 <a href="https://www.linkedin.com/in/ahmed-azam-320a98200" target="_blank" rel="noopener noreferrer" title="LinkedIn"><span class="material-icons-outlined">link</span> LinkedIn Profile</a>
-                             </div>
-                        </div>
+        <!-- Section 4: Scan / Upload -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubP34R.jpg" alt="CropCare Scan/Upload Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                 <h2><span class="highlight">Easy</span> Diagnosis Input</h2>
+                 <p>Getting a diagnosis is effortless. Use your phone's camera to take a clear photo or simply upload an existing image from your gallery.</p>
+                 <p>Our AI is ready to analyze the visual data for signs of diseases or deficiencies.</p>
+            </div>
+        </section>
+
+         <!-- Section 5: History -->
+         <section class="content-section">
+              <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ub6Kbe.md.jpg" alt="CropCare History Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Scan <span class="highlight">History</span> & Tracking</h2>
+                <p>Keep a detailed record of all your plant scans. Easily track the health progression of individual plants or crops over time.</p>
+                <p>Quickly see past diagnoses or confirmations of health. Includes timestamps and detected issues.</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Scanning -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3um9Enp.png" alt="CropCare Scanning Screen"> </div>
+                </div>
+            </div>
+             <div class="section-content">
+                 <h2>AI Analysis <span class="highlight">In Progress</span></h2>
+                 <p>Sit back while our powerful, trained AI model analyzes the image you provided. The visual scanning process identifies patterns, discoloration, and textures indicative of various conditions.</p>
+                 <p>Processing usually takes just a few moments.</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Disease Detected Result -->
+        <section class="content-section">
+            <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubPmF4.png" alt="CropCare Disease Detected Result"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Detailed <span class="highlight">AI Diagnosis</span></h2>
+                <p>Receive clear, actionable results. When a disease or issue is detected, CropCare provides:</p>
+                <ul>
+                    <li><span class="material-icons-outlined">coronavirus</span>Likely identification.</li>
+                    <li><span class="material-icons-outlined">biotech</span>Description of symptoms & impact.</li>
+                    <li><span class="material-icons-outlined">healing</span>Recommended treatment steps.</li>
+                 </ul>
+                 <p>(Note: Lab testing may be needed for definitive viral confirmation).</p>
+            </div>
+        </section>
+
+        <!-- Section 8: Healthy Result -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubinSV.png" alt="CropCare Healthy Result"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Health <span class="highlight">Confirmation</span></h2>
+                <p>Good news! When no issues are detected, CropCare confirms the plant appears healthy based on the visual analysis.</p>
+                <p>We provide a confidence score reflecting the AI's certainty and a low danger level indicator.</p>
+            </div>
+        </section>
+
+         <!-- Section 9: Settings -->
+         <section class="content-section">
+             <div class="section-visual">
+                 <div class="phone-frame">
+                   <div class="phone-screen"> <img src="https://iili.io/3ubialR.png" alt="CropCare Settings Screen"> </div>
+                </div>
+            </div>
+            <div class="section-content">
+                <h2>Customizable <span class="highlight">Settings</span></h2>
+                <p>Tailor CropCare to your needs. Adjust preferences such as:</p>
+                 <ul>
+                    <li><span class="material-icons-outlined">location_on</span> Enabling location services.</li>
+                    <li><span class="material-icons-outlined">translate</span> Choosing your preferred language.</li>
+                    <li><span class="material-icons-outlined">info</span> Accessing app information.</li>
+                 </ul>
+            </div>
+        </section>
+
+        <!-- Section 10: App Demo Video (Inside Frame) -->
+        <section class="content-section">
+             <div class="section-visual">
+                <div class="phone-frame">
+                   <div class="phone-screen">
+                       <video controls width="100%" height="100%" preload="metadata" poster="OPTIONAL_POSTER_IMAGE_URL">
+                           <source src="https://www.dropbox.com/scl/fi/1klxb7gar04n5tgaclttm/cropcare_vid.mp4?rlkey=6x2ok211923n9fu15n5k0awc8&st=qw2kfam3&raw=1" type="video/mp4">
+                           Your browser does not support the video tag.
+                       </video>
+                   </div>
+                </div>
+            </div>
+             <div class="section-content">
+                 <h2>See <span class="highlight">CropCare</span> in Action!</h2>
+                 <p>Watch this short demo to see how easily you can scan your plants and get instant AI-powered health insights right on your phone.</p>
+                 <p>From identifying potential diseases to confirming healthy growth, CropCare puts expert knowledge in your pocket.</p>
+            </div>
+        </section>
+
+        <!-- Section 11: APK Installation Guide -->
+        <!-- This section might not need the side-by-side layout, let it be centered -->
+        <section class="content-section" style="flex-direction: column;"> <!-- Force column layout -->
+             <div class="install-steps-container">
+                 <h2>Install <span class="highlight">CropCare</span> on Android</h2>
+                 <p>Follow these simple steps to install the CropCare app using the APK file.</p>
+                 <div class="install-steps">
+                    <div class="step-card"> <div class="icon-wrapper"><span class="material-icons">download</span></div> <h3>1. Download APK</h3> <p>Tap the download button below to get the `CropCare.apk` file.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">security</span></div> <h3>2. Allow Sources</h3> <p>Go to Settings > Security, enable "Install unknown apps" for your browser/file manager.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">folder_open</span></div> <h3>3. Locate & Install</h3> <p>Open your File Manager, find the downloaded APK, and tap it to install.</p> </div>
+                     <div class="step-card"> <div class="icon-wrapper"><span class="material-icons-outlined">launch</span></div> <h3>4. Launch App</h3> <p>Find the CropCare icon on your phone and tap to start diagnosing!</p> </div>
+                 </div>
+                  <a href="https://www.dropbox.com/scl/fi/jlmnsyal4okvoj4j4n500/CropCare.apk?rlkey=qsqsji66x9w1t1kdcd2e7dqkl&st=rjldxqhp&dl=1" class="download-button" download>
+                    <span class="material-icons-outlined">file_download</span> Download CropCare APK
+                 </a>
+            </div>
+        </section>
+
+        <!-- Section 12: Developer Info -->
+        <!-- This section is also better centered -->
+         <section class="content-section" style="flex-direction: column; border-bottom: none;"> <!-- Force column, no bottom border -->
+             <div class="dev-info-container">
+                <div class="dev-photo">
+                     <img src="https://www.dropbox.com/scl/fi/1t2nmze4hzi5bchak36ft/FB_IMG_1743224652660.jpg?rlkey=to88ennpo14fn1171y9n1d7ak&st=nyidi6ow&raw=1" alt="Ahmed Amr Azam Photo">
+                </div>
+                <div class="dev-details">
+                     <h2>Meet the <span class="highlight">Developer</span></h2>
+                     <h3>Ahmed Amr Azam</h3>
+                     <span class="role">Flutter, Android & Web Developer | Physics Teacher</span>
+                     <p class="bio">
+                        A dedicated developer specializing in Flutter, Dart, Android Studio, and web applications, Ahmed brings a unique perspective, combining technical expertise with a background as a Physics teacher. His passion extends beyond code, finding fascination in the elegance of mathematical equations and the intricacies of physical phenomena. This blend of analytical thinking and creative problem-solving drives his approach to building intuitive and effective applications like CropCare.
+                     </p>
+                     <div class="contact-info">
+                         <a href="mailto:ahmedazaki0125@gmail.com" title="Email"><span class="material-icons-outlined">email</span> ahmedazaki0125@gmail.com</a>
+                         <a href="https://www.linkedin.com/in/ahmed-azam-320a98200" target="_blank" rel="noopener noreferrer" title="LinkedIn"><span class="material-icons-outlined">link</span> LinkedIn Profile</a>
                      </div>
                 </div>
+             </div>
+        </section>
 
-            </div> <!-- /slider -->
+    </div> <!-- /page-container -->
 
-            <!-- Navigation Dots -->
-            <div class="slider-dots"></div>
+    <!-- NO SCRIPT NEEDED FOR STATIC PAGE -->
 
-             <!-- Navigation Arrows -->
-            <button class="slider-arrow prev" aria-label="Previous slide">❮</button>
-            <button class="slider-arrow next" aria-label="Next slide">❯</button>
-
-        </div> <!-- /slider-wrapper -->
-
-    </div> <!-- /presentation-container -->
-
-    <script>
-        // --- START JAVASCRIPT ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.querySelector('.slider');
-            const slides = document.querySelectorAll('.slide');
-            const dotsContainer = document.querySelector('.slider-dots');
-            const prevArrow = document.querySelector('.slider-arrow.prev');
-            const nextArrow = document.querySelector('.slider-arrow.next');
-            const videoElement = document.querySelector('#appDemoVideo'); // Get the video element by ID
-
-            let currentIndex = 0;
-            let slideInterval;
-            const slideDuration = 7000; // Slide duration
-
-            dotsContainer.innerHTML = '';
-            if (slides.length > 0) {
-                slides.forEach((_, index) => {
-                    const dot = document.createElement('span');
-                    dot.classList.add('dot');
-                    dot.dataset.index = index;
-                    dotsContainer.appendChild(dot);
-                });
-            }
-            const dots = document.querySelectorAll('.dot');
-
-            function showSlide(index) {
-                if (slides.length === 0 || !slider) return;
-                if (index >= slides.length) index = 0;
-                else if (index < 0) index = slides.length - 1;
-
-                // Pause any playing video when sliding away (if it exists)
-                // This check is broad but safe
-                const currentActiveSlide = slides[currentIndex];
-                const currentVideo = currentActiveSlide ? currentActiveSlide.querySelector('video') : null;
-                if (currentVideo && !currentVideo.paused) {
-                    currentVideo.pause();
-                    // Optionally restart interval immediately after pausing video due to slide change
-                    // resetInterval(); // You might uncomment this if pausing should always restart timer
-                }
-
-
-                slider.style.transform = `translateX(${-index * 100}%)`;
-
-                if (dots.length > 0) {
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    if(dots[index]) dots[index].classList.add('active');
-                }
-                currentIndex = index;
-                resetInterval(); // Reset timer on every manual/programmatic slide change
-            }
-
-            // --- Event Listeners for Dots/Arrows ---
-            if (dots.length > 0) {
-                dots.forEach(dot => {
-                    dot.addEventListener('click', (e) => {
-                         if (e.target.classList.contains('dot')) {
-                            const index = parseInt(e.target.dataset.index);
-                            if (!isNaN(index)) showSlide(index);
-                         }
-                    });
-                });
-            }
-            if (prevArrow) prevArrow.addEventListener('click', () => showSlide(currentIndex - 1));
-            if (nextArrow) nextArrow.addEventListener('click', () => showSlide(currentIndex + 1));
-
-            // --- Auto Sliding Functions ---
-            function startInterval() {
-                 clearInterval(slideInterval);
-                 if (slides.length > 1) {
-                     slideInterval = setInterval(() => showSlide(currentIndex + 1), slideDuration);
-                 }
-            }
-            function resetInterval() {
-                 // Only reset if video is not currently playing OR if the video element doesn't exist
-                 if (slides.length > 1 && (!videoElement || videoElement.paused)) {
-                    clearInterval(slideInterval);
-                    startInterval();
-                 } else {
-                     // If video is playing, ensure interval remains cleared
-                     clearInterval(slideInterval);
-                 }
-            }
-
-            // --- Video Event Listeners ---
-            if (videoElement) {
-                videoElement.addEventListener('play', () => {
-                    console.log('Video playing, pausing slideshow.');
-                    clearInterval(slideInterval); // Pause auto-slide
-                });
-
-                videoElement.addEventListener('pause', () => {
-                    console.log('Video paused, resuming slideshow.');
-                    // Resume auto-slide ONLY if the slider should normally be sliding
-                    if (slides.length > 1) {
-                       resetInterval(); // Will restart interval correctly
-                    }
-                });
-
-                videoElement.addEventListener('ended', () => {
-                    console.log('Video ended, resuming slideshow.');
-                     // Resume auto-slide ONLY if the slider should normally be sliding
-                     if (slides.length > 1) {
-                       resetInterval(); // Will restart interval correctly
-                    }
-                });
-            }
-
-            // --- Initial Setup ---
-            function setupSlider() {
-                 if (slides.length > 0) {
-                    slider.style.transition = 'none'; slider.style.transform = 'translateX(0%)';
-                    slider.offsetHeight; // Force reflow
-                    slider.style.transition = '';
-                    if(dots[0]) dots[0].classList.add('active');
-                     const showControls = slides.length > 1;
-                     if (dotsContainer) dotsContainer.style.display = showControls ? 'block' : 'none';
-                     if (prevArrow) prevArrow.style.display = showControls ? 'flex' : 'none';
-                     if (nextArrow) nextArrow.style.display = showControls ? 'flex' : 'none';
-                     if (showControls) setTimeout(startInterval, slideDuration); // Initial start
-                 } else {
-                    if (dotsContainer) dotsContainer.style.display = 'none';
-                    if (prevArrow) prevArrow.style.display = 'none';
-                    if (nextArrow) nextArrow.style.display = 'none';
-                    console.warn("CropCare Slider: No slides found.");
-                 }
-            }
-             setupSlider();
-        });
-        // --- END JAVASCRIPT ---
-    </script>
 </body>
 </html>
