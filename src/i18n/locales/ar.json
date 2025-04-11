@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "كروب كير",
+    "subtitle": "الكشف عن أمراض النباتات بسهولة",
+    "uploadPrompt": "التقط صورة أو قم بتحميل صورة للنبات للكشف عن الأمراض والحصول على توصيات العلاج",
+    "takePhoto": "التقط صورة",
+    "uploadImage": "تحميل صورة",
+    "analyzing": "جاري تحليل النبات...",
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "location": "الموقع",
+    "locationHint": "أفضل النتائج في حالة التفعيل",
+    "about": "حول",
+    "version": "الإصدار",
+    "developer": "المطور"
+  },
+  "results": {
+    "healthy": "سليم",
+    "diseased": "مصاب",
+    "confidence": "نسبة الثقة",
+    "dangerLevel": "مستوى الخطر",
+    "symptoms": "الأعراض",
+    "treatments": "العلاج",
+    "preventionTips": "نصائح الوقاية",
+    "analyzeAnother": "تحليل نبات آخر",
+    "noDiseaseDetected": "لم يتم اكتشاف مرض"
+  },
+  "history": {
+    "title": "السجل",
+    "scanned": "تم الفحص",
+    "disease": "المرض",
+    "noScans": "لا يوجد فحوصات بعد",
+    "startScanning": "ابدأ بفحص النباتات لبناء سجلك"
+  }
+}

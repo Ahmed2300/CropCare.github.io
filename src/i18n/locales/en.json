@@ -1,0 +1,35 @@
+{
+  "app": {
+    "title": "CropCare",
+    "subtitle": "Plant disease detection made easy",
+    "uploadPrompt": "Take a photo or upload an image of your plant to diagnose diseases and get treatment recommendations",
+    "takePhoto": "Take a photo",
+    "uploadImage": "Upload image",
+    "analyzing": "Analyzing your plant...",
+    "settings": "Settings",
+    "language": "Language",
+    "location": "Location",
+    "locationHint": "Best results in case of enabled",
+    "about": "About",
+    "version": "Version",
+    "developer": "Developer"
+  },
+  "results": {
+    "healthy": "Healthy",
+    "diseased": "Diseased",
+    "confidence": "Confidence",
+    "dangerLevel": "Danger Level",
+    "symptoms": "Symptoms",
+    "treatments": "Treatments",
+    "preventionTips": "Prevention Tips",
+    "analyzeAnother": "Analyze Another Plant",
+    "noDiseaseDetected": "No Disease Detected"
+  },
+  "history": {
+    "title": "History",
+    "scanned": "Scanned",
+    "disease": "Disease",
+    "noScans": "No Scans Yet",
+    "startScanning": "Start scanning plants to build your history"
+  }
+}
